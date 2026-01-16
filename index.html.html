@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdClickEarn - Earn Money by Clicking Ads</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: #26d0ce;
+            font-size: 32px;
+        }
+        
+        .logo h1 {
+            color: #1a2980;
+            font-size: 28px;
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .balance-box {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .balance-amount {
+            font-size: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #1a2980;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0e1a5a;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #1e7e34;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+        
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        
+        .btn-purple {
+            background-color: #6f42c1;
+            color: white;
+        }
+        
+        .btn-purple:hover {
+            background-color: #59359c;
+        }
+        
+        main {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: #1a2980;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .info-label {
+            color: #666;
+        }
+        
+        .info-value {
+            font-weight: bold;
+            color: #1a2980;
+        }
+        
+        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+        
+        .content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .content-header h2 {
+            color: #1a2980;
+        }
+        
+        .day-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .friday-alert {
+            background-color: #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .friday-alert i {
+            font-size: 24px;
+        }
+        
+        /* Ads in 2 columns with smaller size */
+        .ads-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .ad-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.3s;
+            min-height: 120px;
+            justify-content: space-between;
+        }
+        
+        .ad-card:hover {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .ad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ad-id {
+            background-color: #1a2980;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .ad-amount {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .ad-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .click-count {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .ad-btn {
+            padding: 8px 15px;
+            background-color: #1a2980;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        
+        .ad-btn:hover {
+            background-color: #0e1a5a;
+        }
+        
+        .ad-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .ad-description {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin: 3px 0;
+        }
+        
+        .account-banned {
+            background-color: #dc3545;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .account-banned i {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .account-banned h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h3 {
+            color: #1a2980;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification.success {
+            background-color: #28a745;
+        }
+        
+        .notification.error {
+            background-color: #dc3545;
+        }
+        
+        .notification.info {
+            background-color: #17a2b8;
+        }
+        
+        .notification.warning {
+            background-color: #ffc107;
+            color: #856404;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .account-warning {
+            background-color: #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .account-warning i {
+            font-size: 24px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1a2980, #26d0ce);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .balance-warning {
+            color: #dc3545;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .share-section {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .share-link-container {
+            display: flex;
+            margin: 15px 0;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .share-link {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: none;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .share-btn {
+            padding: 10px 20px;
+            background-color: #1a2980;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .share-btn:hover {
+            background-color: #0e1a5a;
+        }
+        
+        .share-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .share-reward {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .withdraw-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .withdraw-btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        
+        .social-share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-share-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .social-share-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .social-share-btn.facebook {
+            background-color: #3b5998;
+        }
+        
+        .social-share-btn.whatsapp {
+            background-color: #25D366;
+        }
+        
+        .social-share-btn.telegram {
+            background-color: #0088cc;
+        }
+        
+        .social-share-btn.twitter {
+            background-color: #1DA1F2;
+        }
+        
+        .social-share-btn.email {
+            background-color: #EA4335;
+        }
+        
+        .social-share-btn.copy {
+            background-color: #6c757d;
+        }
+        
+        .offline-message {
+            background-color: #dc3545;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            grid-column: 1/-1;
+        }
+        
+        .offline-message i {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .offline-message h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .country-selector {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .country-selector h3 {
+            color: #1a2980;
+            margin-bottom: 15px;
+        }
+        
+        .country-flags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .country-flag {
+            padding: 8px 15px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .country-flag:hover {
+            border-color: #1a2980;
+            background-color: #f0f8ff;
+        }
+        
+        .country-flag.selected {
+            border-color: #28a745;
+            background-color: #e8f5e9;
+        }
+        
+        .ad-instruction {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            grid-column: 1/-1;
+        }
+        
+        /* New class for hidden ads */
+        .ad-card.hidden {
+            display: none !important;
+        }
+        
+        /* Auto-hide animation */
+        .ad-card.hiding {
+            animation: hideAnimation 0.5s ease forwards;
+        }
+        
+        @keyframes hideAnimation {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+                height: 0;
+                padding: 0;
+                margin: 0;
+                border: 0;
+                overflow: hidden;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .ads-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .share-link-container {
+                flex-direction: column;
+            }
+            
+            .share-link {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .social-share-buttons {
+                gap: 10px;
+            }
+            
+            .social-share-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .ad-card {
+                padding: 10px;
+                min-height: 110px;
+            }
+            
+            .country-flags {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .country-flag {
+                flex-shrink: 0;
+            }
+        }
+        
+        /* Small ad card responsive */
+        @media (max-width: 480px) {
+            .ad-card {
+                padding: 8px;
+                min-height: 100px;
+            }
+            
+            .ad-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .ad-amount {
+                font-size: 14px;
+            }
+            
+            .ad-id {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-ad"></i>
+                <h1>AdClickEarn</h1>
+            </div>
+            
+            <div class="user-section">
+                <div class="balance-box">
+                    <div>Your Balance</div>
+                    <div class="balance-amount">$<span id="current-balance">0.00</span></div>
+                </div>
+                <button class="btn btn-primary" id="login-btn">Login</button>
+                <button class="btn btn-success" id="register-btn">Register</button>
+                <button class="btn btn-danger" id="logout-btn" style="display: none;">Logout</button>
+                <button class="btn btn-warning" id="withdraw-btn" style="display: none;">Withdraw</button>
+            </div>
+        </header>
+        
+        <main>
+            <div class="sidebar">
+                <h3>Account Information</h3>
+                <div class="user-info">
+                    <div class="info-item">
+                        <span class="info-label">Username:</span>
+                        <span class="info-value" id="username-display">Guest</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Selected Country:</span>
+                        <span class="info-value" id="selected-country">Not Selected</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Member Since:</span>
+                        <span class="info-value" id="member-since">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Total Earnings:</span>
+                        <span class="info-value">$<span id="total-earnings">0.00</span></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Total Clicks:</span>
+                        <span class="info-value" id="total-clicks">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Referral Earnings:</span>
+                        <span class="info-value">$<span id="referral-earnings">0.00</span></span>
+                    </div>
+                </div>
+                
+                <h3>Today's Stats</h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span>Ads Clicked Today:</span>
+                        <span id="today-clicks">0/100</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Earned Today:</span>
+                        <span>$<span id="today-earnings">0.00</span></span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Shared Today:</span>
+                        <span id="shared-today">No</span>
+                    </div>
+                </div>
+                
+                <!-- Progress bar to $100 -->
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Balance Progress:</span>
+                        <span id="balance-progress-text">$0.00 / $100.00</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="balance-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="balance-warning" id="balance-warning">
+                        Minimum Withdraw at $100.00
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="content-header">
+                    <h2>Click Ads & Earn Money</h2>
+                    <div class="day-indicator">
+                        <i class="fas fa-calendar-day"></i>
+                        <span id="current-day">Monday</span>
+                    </div>
+                </div>
+                
+                <!-- Country Selector -->
+                <div class="country-selector">
+                    <h3><i class="fas fa-globe-americas"></i> Select Your Country</h3>
+                    <p>Select your country for better ad targeting:</p>
+                    <div class="country-flags">
+                        <div class="country-flag" data-country="US">
+                            <i class="fas fa-flag-usa"></i>
+                            <span>United States</span>
+                        </div>
+                        <div class="country-flag" data-country="CA">
+                            <i class="fas fa-flag"></i>
+                            <span>Canada</span>
+                        </div>
+                        <div class="country-flag" data-country="UK">
+                            <i class="fas fa-flag-uk"></i>
+                            <span>United Kingdom</span>
+                        </div>
+                        <div class="country-flag" data-country="AU">
+                            <i class="fas fa-flag"></i>
+                            <span>Australia</span>
+                        </div>
+                        <div class="country-flag" data-country="DE">
+                            <i class="fas fa-flag"></i>
+                            <span>Germany</span>
+                        </div>
+                        <div class="country-flag" data-country="JP">
+                            <i class="fas fa-flag"></i>
+                            <span>Japan</span>
+                        </div>
+                        <div class="country-flag" data-country="TR">
+                            <i class="fas fa-flag"></i>
+                            <span>Turkey</span>
+                        </div>
+                        <div class="country-flag" data-country="IN">
+                            <i class="fas fa-flag"></i>
+                            <span>India</span>
+                        </div>
+                        <div class="country-flag" data-country="FR">
+                            <i class="fas fa-flag"></i>
+                            <span>France</span>
+                        </div>
+                        <div class="country-flag" data-country="BR">
+                            <i class="fas fa-flag"></i>
+                            <span>Brazil</span>
+                        </div>
+                        <div class="country-flag" data-country="OTHER">
+                            <i class="fas fa-globe"></i>
+                            <span>Other Country</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account banned message - shown when account is banned -->
+                <div id="account-banned-message" class="account-banned" style="display: none;">
+                    <i class="fas fa-ban"></i>
+                    <h3>Account Banned!</h3>
+                    <p>Your account has been banned due to fake clicks or not completing ads.</p>
+                    <p style="margin: 15px 0; font-size: 18px;">You earned: <strong>$<span id="banned-earnings">0.00</span></strong></p>
+                    <p>Please create a new account to continue.</p>
+                    <button class="btn btn-success" id="create-new-account-btn" style="margin-top: 20px; padding: 12px 25px;">
+                        <i class="fas fa-user-plus"></i> Create New Account
+                    </button>
+                </div>
+                
+                <!-- Share Section -->
+                <div class="share-section">
+                    <h3><i class="fas fa-share-alt"></i> Share Daily & Earn $1</h3>
+                    <p>Share our app with your friends every day and earn $1 when someone joins!</p>
+                    
+                    <div class="share-link-container">
+                        <input type="text" class="share-link" id="share-link-input" value="https://www.appcreator24.com/app3880266-4unoqx" readonly>
+                        <button class="share-btn" id="copy-link-btn"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    
+                    <div class="share-reward">
+                        <i class="fas fa-gift"></i>
+                        <span>Earn $1 per day for sharing</span>
+                        <button class="btn btn-purple" id="share-reward-btn" style="margin-left: 15px;">
+                            <i class="fas fa-share"></i> Share & Earn $1
+                        </button>
+                    </div>
+                    
+                    <p style="margin-top: 10px; font-size: 14px; opacity: 0.9;">
+                        <i class="fas fa-info-circle"></i> You can earn $1 every day when someone joins using your link
+                    </p>
+                </div>
+                
+                <!-- Account warning when approaching $100 -->
+                <div id="account-warning" class="account-warning" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h3>Warning: Account Approaching Withdrawal Limit</h3>
+                        <p>Your balance is approaching $100. When you reach $100, you can withdraw your earnings.</p>
+                    </div>
+                </div>
+                
+                <div id="friday-alert" class="friday-alert" style="display: none;">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <div>
+                        <h3>It's Friday - No Ads Today!</h3>
+                        <p>Today is Friday, our weekly holiday. No ads will be shown today. Enjoy your day off!</p>
+                    </div>
+                </div>
+                
+                <!-- Withdraw Section -->
+                <div class="withdraw-section">
+                    <h3>Withdraw Your Earnings</h3>
+                    <p>You can withdraw your earnings when you reach $100</p>
+                    <div style="font-size: 24px; font-weight: bold; color: #28a745; margin: 10px 0;">
+                        Current Balance: $<span id="withdraw-balance">0.00</span>
+                    </div>
+                    <button class="btn btn-success withdraw-btn" id="withdraw-request-btn">
+                        <i class="fas fa-money-bill-wave"></i> Withdraw $100
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                        <i class="fas fa-info-circle"></i> You need at least $100 to withdraw
+                    </p>
+                </div>
+                
+                <!-- Ad Click Instruction -->
+                <div class="ad-instruction">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <i class="fas fa-exclamation-triangle" style="color: #856404; font-size: 20px;"></i>
+                        <h4 style="color: #856404; margin: 0;">Important Notice for Ad Clicks</h4>
+                    </div>
+                    <div style="color: #856404;">
+                        <p style="margin: 5px 0;"><i class="fas fa-clock"></i> <strong>Wait Time Required:</strong> After clicking an ad, you must wait 5-10 seconds on the ad page. Otherwise, it will be counted as a fake click.</p>
+                        <p style="margin: 5px 0;"><i class="fas fa-ban"></i> <strong>Consequences:</strong> Fake clicks may lead to account ban and loss of earnings.</p>
+                        <p style="margin: 5px 0;"><i class="fas fa-share-alt"></i> <strong>Daily Sharing:</strong> You can share multiple times a day, but you will receive only $1 bonus per day for sharing.</p>
+                        <p style="margin: 5px 0;"><i class="fas fa-eye-slash"></i> <strong>Auto-Hide System:</strong> Ads will automatically hide after being clicked to keep the interface clean.</p>
+                    </div>
+                </div>
+                
+                <!-- Ads Container -->
+                <div class="ads-container" id="ads-container">
+                    <!-- Ads will be dynamically inserted here -->
+                </div>
+                
+                <!-- Information Section -->
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h3 style="color: #1a2980; margin-bottom: 15px;">How It Works</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                        <div style="text-align: center; padding: 15px;">
+                            <i class="fas fa-mouse-pointer" style="font-size: 32px; color: #1a2980; margin-bottom: 10px;"></i>
+                            <h4>Click Ads</h4>
+                            <p>Click on ads to earn $0.05 per click</p>
+                        </div>
+                        <div style="text-align: center; padding: 15px;">
+                            <i class="fas fa-share-alt" style="font-size: 32px; color: #1a2980; margin-bottom: 10px;"></i>
+                            <h4>Share & Earn</h4>
+                            <p>Share daily and earn $1 per referral</p>
+                        </div>
+                        <div style="text-align: center; padding: 15px;">
+                            <i class="fas fa-globe" style="font-size: 32px; color: #1a2980; margin-bottom: 10px;"></i>
+                            <h4>Global Access</h4>
+                            <p>Available worldwide in multiple countries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>AdClickEarn © 2026 | Earn money by clicking ads | Every click earns you $0.05 | Share daily and earn $1</p>
+            <p>Available in all countries. Select your country for better ad targeting.</p>
+        </footer>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to Your Account</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="margin-top: 15px; text-align: center; color: #666;">
+                Don't have an account? <a href="#" id="switch-to-register" style="color: #1a2980; font-weight: bold;">Register here</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Account</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input type="text" id="register-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-success" style="width: 100%;">Register</button>
+            </form>
+            <p style="margin-top: 15px; text-align: center; color: #666;">
+                Already have an account? <a href="#" id="switch-to-login" style="color: #1a2980; font-weight: bold;">Login here</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Withdraw Modal -->
+    <div class="modal" id="withdraw-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Withdraw Your Earnings</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div id="withdraw-success" style="text-align: center; display: none;">
+                <i class="fas fa-check-circle" style="font-size: 64px; color: #28a745; margin-bottom: 20px;"></i>
+                <h3>Withdrawal Request Submitted!</h3>
+                <p>Your request to withdraw $100 has been submitted successfully.</p>
+                <p>Our team will process your payment within 24 hours.</p>
+                <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" id="close-withdraw-modal">OK</button>
+            </div>
+            
+            <div id="withdraw-fail" style="text-align: center; display: none;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 64px; color: #dc3545; margin-bottom: 20px;"></i>
+                <h3>Account Banned!</h3>
+                <p>Your account has been banned due to fake clicks or not completing ads.</p>
+                <p style="margin: 15px 0; font-size: 18px;">You earned: <strong>$<span id="banned-withdraw-earnings">0.00</span></strong></p>
+                <p>Please create a new account to continue.</p>
+                    <button class="btn btn-success" id="create-new-after-ban" style="margin-top: 20px; width: 100%;">
+                    <i class="fas fa-user-plus"></i> Create New Account
+                </button>
+            </div>
+            
+            <div id="withdraw-form">
+                <p>You are about to withdraw $100 from your account.</p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Current Balance:</span>
+                        <span style="font-weight: bold;">$<span id="modal-balance">0.00</span></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Withdrawal Amount:</span>
+                        <span style="font-weight: bold; color: #28a745;">$100.00</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment-method">Payment Method</label>
+                    <select id="payment-method">
+                        <option value="paypal">PayPal</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="crypto">Cryptocurrency</option>
+                        <option value="skrill">Skrill</option>
+                        <option value="neteller">Neteller</option>
+                        <option value="payoneer">Payoneer</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment-details">Payment Details (Email/Account Number)</label>
+                    <input type="text" id="payment-details" required>
+                </div>
+                
+                <button type="button" class="btn btn-success" style="width: 100%;" id="confirm-withdraw-btn">
+                    <i class="fas fa-money-bill-wave"></i> Confirm Withdrawal
+                </button>
+                <p style="margin-top: 15px; text-align: center; color: #666; font-size: 14px;">
+                    <i class="fas fa-info-circle"></i> Withdrawal will be processed within 24 hours
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Share Modal -->
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Daily & Earn $1</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div style="text-align: center; padding: 10px;">
+                <p>Share our app with your friends every day and earn $1 when someone joins!</p>
+                
+                <div class="share-link-container" style="margin: 20px 0;">
+                    <input type="text" class="share-link" id="share-modal-link-input" value="https://www.appcreator24.com/app3880266-4unoqx" readonly>
+                    <button class="share-btn" id="copy-modal-link-btn"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+                
+                <div style="margin: 25px 0;">
+                    <h4>Share via</h4>
+                    <div class="social-share-buttons">
+                        <button class="social-share-btn facebook" id="share-facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-share-btn whatsapp" id="share-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button class="social-share-btn telegram" id="share-telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </button>
+                        <button class="social-share-btn twitter" id="share-twitter">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="social-share-btn email" id="share-email">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        <button class="social-share-btn copy" id="share-copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Sharing Instructions in Modal -->
+                <div style="background-color: #fff3cd; padding: 12px; border-radius: 6px; margin-top: 20px; border-left: 4px solid #ffc107;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                        <i class="fas fa-info-circle" style="color: #856404;"></i>
+                        <strong style="color: #856404;">Sharing Information:</strong>
+                    </div>
+                    <p style="margin: 5px 0; color: #856404; font-size: 14px;">
+                        <i class="fas fa-check-circle" style="color: #28a745;"></i> You can share multiple times per day
+                    </p>
+                    <p style="margin: 5px 0; color: #856404; font-size: 14px;">
+                        <i class="fas fa-check-circle" style="color: #28a745;"></i> You will receive $1 bonus only once per day
+                    </p>
+                    <p style="margin: 5px 0; color: #856404; font-size: 14px;">
+                        <i class="fas fa-check-circle" style="color: #28a745;"></i> Sharing every day maximizes your earnings
+                    </p>
+                </div>
+                
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <h4><i class="fas fa-gift"></i> Daily Reward</h4>
+                    <p>You can earn $1 every day when someone joins using your link.</p>
+                    <p style="font-weight: bold; color: #28a745; margin-top: 10px;">
+                        <i class="fas fa-check-circle"></i> Earn $1 per day per successful referral
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // User data and state management
+        const userData = {
+            isLoggedIn: false,
+            username: '',
+            email: '',
+            joinDate: '',
+            country: '',
+            balance: 0,
+            totalEarnings: 0,
+            referralEarnings: 0,
+            totalClicks: 0,
+            todayClicks: 0,
+            todayEarnings: 0,
+            isAccountBanned: false,
+            clickedAds: [],
+            sharedToday: false,
+            lastShareDate: '',
+            accountNumber: 1,
+            hiddenAds: [] // New property to track hidden ads
+        };
+        
+        // Country data with flags and names
+        const countries = {
+            'US': { name: 'United States', flag: 'fas fa-flag-usa' },
+            'CA': { name: 'Canada', flag: 'fas fa-flag' },
+            'UK': { name: 'United Kingdom', flag: 'fas fa-flag-uk' },
+            'AU': { name: 'Australia', flag: 'fas fa-flag' },
+            'DE': { name: 'Germany', flag: 'fas fa-flag' },
+            'JP': { name: 'Japan', flag: 'fas fa-flag' },
+            'TR': { name: 'Turkey', flag: 'fas fa-flag' },
+            'IN': { name: 'India', flag: 'fas fa-flag' },
+            'FR': { name: 'France', flag: 'fas fa-flag' },
+            'BR': { name: 'Brazil', flag: 'fas fa-flag' },
+            'OTHER': { name: 'Other Country', flag: 'fas fa-globe' }
+        };
+        
+        // Ad data - updated with 100+ ads per day
+        const adUrls = [
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://data527.click/a3e8b5d5baf9988ceb1c/b0c21320fd/?placementName=default",
+            "https://data527.click/a3e8b5d5baf9988ceb1c/f3daa275a2/?placementName=default",
+            "https://data527.click/a3e8b5d5baf9988ceb1c/ba808b92e9/?placementName=default",
+            "https://data527.click/d06c1cf35d5bc1458779/3227feba55/?placementName=Banner",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://progenybanquet.com/emrgtwr88g?key=9ea8bce9bde7ea2299dfd0716b7edf9e",
+            "https://progenybanquet.com/h6escux8p?key=08a6bd5bd7bc59632de8c143d346eee0",
+            "https://progenybanquet.com/bzkay91h1c?key=ca87947122692a9be97f3295042c9179",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://progenybanquet.com/vz23fszi0d?key=e9717a371e08d72af2b19dcd302faf93",
+            "https://progenybanquet.com/n2sti01u?key=1fd2961d082db523c55a7d0bfc459daf",
+            "https://data527.click/d06c1cf35d5bc1458779/590f366c26/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/87ced637c7/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/ffaa7848a8/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/63f0bbfee0/?placementName=Banner",
+            "https://progenybanquet.com/emph2eiszh?key=38ed1e9841b7ac23d7af17ef5fe60bb1",
+            "https://progenybanquet.com/t5c0m20w?key=28a3ae6e654b5b6ec9b8600b33c5a70b",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://progenybanquet.com/seubjs7t?key=542dbd29b09dce0b396dafe8c1992f57",
+            "https://progenybanquet.com/ktxrcebhd?key=079388b1426ac744b5ceea45b32afd8a",
+            "https://progenybanquet.com/zittm4zfqh?key=8c8b269c87e1071ec728937800a9143d",
+            "https://data527.click/d06c1cf35d5bc1458779/d7f07715b2/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/e6421e9e3f/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/eb6ee131cc/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/55b96e3bd6/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/f62bf6cd15/?placementName=Banner",
+            "https://progenybanquet.com/cvzij5a3j?key=7d0cb21d4181e391b49f8937edcc6428",
+            "https://progenybanquet.com/dsj4ug5tz?key=618f6fe78e0d792db723742816a2d866",
+            "https://progenybanquet.com/imknyciza?key=88c0f7d3a36308f2fc53a775b36a8501",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://progenybanquet.com/tkguvzb2?key=29a3d70d9d865a7a8221edaed44dabff",
+            "https://progenybanquet.com/zw0im881k3?key=c3affbd60b1c8885c9d2b704a6cb4628",
+            "https://tendermaterial.com/bg3SV.0/PE3kpmvAb/mhV/JEZBDo0D2-NtTMcrxTOxD/cszhLiT/Yy1zNYzYE/4pNtzuQr",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://data527.click/d06c1cf35d5bc1458779/389bb3a1e8/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/a30d724c42/?placementName=Banner",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://tendermaterial.com/4higZt",
+            "https://tendermaterial.com/wDJla1",
+            "https://tendermaterial.com/AKe9yj",
+            "https://tendermaterial.com/rXoH6K",
+            "https://tendermaterial.com/37F8zS",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://data527.click/d06c1cf35d5bc1458779/58b66c3092/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/b048c59556/?placementName=Banner",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://tendermaterial.com/j14CWw",
+            "https://elderly-foot.com/8QcYEF",
+            "https://tendermaterial.com/gFfnbt",
+            "https://otieu.com/4/9697358",
+            "https://otieu.com/4/10427023",
+            "https://otieu.com/4/10427025",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://data527.click/d06c1cf35d5bc1458779/ddc42db942/?placementName=Banner",
+            "https://data527.click/d06c1cf35d5bc1458779/46aa74c094/?placementName=Banner",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            "https://otieu.com/4/10427027",
+            "https://otieu.com/4/10427028",
+            "https://otieu.com/4/10427029",
+            "https://otieu.com/4/10248730",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://data527.click/d06c1cf35d5bc1458779/94e94cce17/?placementName=Banner",      
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://otieu.com/4/10346785",
+            "https://otieu.com/4/10427030",
+            "https://otieu.com/4/10427035",
+            "https://otieu.com/4/10427036",
+            "https://otieu.com/4/10427038",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+            "https://otieu.com/4/10427039",
+            "https://otieu.com/4/10427041",
+            "https://otieu.com/4/10332961",
+            "https://otieu.com/4/9769732",
+            "https://otieu.com/4/9716645",
+            "https://otieu.com/4/10332960",
+            "https://otieu.com/4/9697771",
+            "https://www.effectivegatecpm.com/vp8vd3gx?key=3650327b8916680f59445f08ed9a14e0",
+            "https://wwp.ailooe.com/redirect-zone/73c3553d",
+            "https://wwp.ailooe.com/redirect-zone/ae0a37f4",
+            "https://wwp.ailooe.com/redirect-zone/b96a6e82",
+            "https://wwp.ailooe.com/redirect-zone/52c25da3",
+            "https://wwp.ailooe.com/redirect-zone/24392bcf",
+        ];
+        
+        // Constants
+        const EARN_PER_CLICK = 0.05;
+        const REFERRAL_REWARD = 1.00;
+        const WITHDRAW_LIMIT = 100;
+        const DAILY_AD_LIMIT = 100;
+        
+        // Days of the week
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const today = new Date();
+        const currentDay = days[today.getDay()];
+        const currentDateString = today.toDateString();
+        
+        // DOM Elements
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const withdrawBtn = document.getElementById('withdraw-btn');
+        const loginModal = document.getElementById('login-modal');
+        const registerModal = document.getElementById('register-modal');
+        const withdrawModal = document.getElementById('withdraw-modal');
+        const shareModal = document.getElementById('share-modal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const adsContainer = document.getElementById('ads-container');
+        const fridayAlert = document.getElementById('friday-alert');
+        const accountBannedMessage = document.getElementById('account-banned-message');
+        const createNewAccountBtn = document.getElementById('create-new-account-btn');
+        const switchToRegister = document.getElementById('switch-to-register');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const copyLinkBtn = document.getElementById('copy-link-btn');
+        const copyModalLinkBtn = document.getElementById('copy-modal-link-btn');
+        const shareRewardBtn = document.getElementById('share-reward-btn');
+        const shareLinkInput = document.getElementById('share-link-input');
+        const shareModalLinkInput = document.getElementById('share-modal-link-input');
+        const withdrawRequestBtn = document.getElementById('withdraw-request-btn');
+        const confirmWithdrawBtn = document.getElementById('confirm-withdraw-btn');
+        const closeWithdrawModal = document.getElementById('close-withdraw-modal');
+        const createNewAfterBan = document.getElementById('create-new-after-ban');
+        const countryFlags = document.querySelectorAll('.country-flag');
+        
+        // Social share buttons
+        const shareFacebookBtn = document.getElementById('share-facebook');
+        const shareWhatsappBtn = document.getElementById('share-whatsapp');
+        const shareTelegramBtn = document.getElementById('share-telegram');
+        const shareTwitterBtn = document.getElementById('share-twitter');
+        const shareEmailBtn = document.getElementById('share-email');
+        const shareCopyBtn = document.getElementById('share-copy');
+        
+        // Update current day display
+        document.getElementById('current-day').textContent = currentDay;
+        
+        // Check if today is Friday
+        if (currentDay === 'Friday') {
+            fridayAlert.style.display = 'flex';
+        }
+        
+        // Initialize the app
+        function initApp() {
+            // Check online status
+            if (!checkOnlineStatus()) {
+                showOfflineMessage();
+                // Add event listeners for online/offline status
+                window.addEventListener('online', renderAds);
+                window.addEventListener('offline', showOfflineMessage);
+                return;
+            }
+            
+            // Check if user data exists in localStorage
+            const savedUserData = localStorage.getItem('adClickUserData');
+            if (savedUserData) {
+                const parsedData = JSON.parse(savedUserData);
+                
+                // Check if today is a new day to reset daily counters
+                const lastActivityDate = localStorage.getItem('lastActivityDate');
+                const todayDateString = today.toDateString();
+                
+                if (lastActivityDate !== todayDateString) {
+                    // New day, reset today's counters
+                    parsedData.todayClicks = 0;
+                    parsedData.todayEarnings = 0;
+                    parsedData.clickedAds = [];
+                    parsedData.hiddenAds = [];
+                    parsedData.sharedToday = false;
+                    
+                    // Save reset data
+                    localStorage.setItem('adClickUserData', JSON.stringify(parsedData));
+                    localStorage.setItem('lastActivityDate', todayDateString);
+                }
+                
+                Object.assign(userData, parsedData);
+                
+                if (userData.isLoggedIn && !userData.isAccountBanned) {
+                    updateUIForLoggedInUser();
+                } else if (userData.isAccountBanned) {
+                    // Show banned account message
+                    showBannedAccount();
+                }
+            }
+        
+            // Update country selection
+            if (userData.country) {
+                selectCountry(userData.country);
+            }
+            
+            // Render ads
+            renderAds();
+            
+            // Update UI with current data
+            updateUI();
+            
+            // Add event listeners for online/offline status
+            window.addEventListener('online', renderAds);
+            window.addEventListener('offline', showOfflineMessage);
+        }
+        
+        // Check online status
+        function checkOnlineStatus() {
+            return navigator.onLine;
+        }
+        
+        // Show offline message
+        function showOfflineMessage() {
+            adsContainer.innerHTML = `
+                <div class="offline-message">
+                    <i class="fas fa-wifi-slash"></i>
+                    <h3>You are Offline!</h3>
+                    <p>Please check your internet connection. Ads are only available when you are online.</p>
+                    <p style="margin-top: 15px;">Connect to the internet and refresh the page to see ads.</p>
+                </div>
+            `;
+        }
+        
+        // Render ads to the page
+        function renderAds() {
+            // Check online status
+            if (!checkOnlineStatus()) {
+                showOfflineMessage();
+                return;
+            }
+            
+            adsContainer.innerHTML = '';
+            
+            // If account is banned, don't show ads
+            if (userData.isAccountBanned) {
+                return;
+            }
+            
+            // If it's Friday, don't show ads
+            if (currentDay === 'Friday') {
+                adsContainer.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-umbrella-beach" style="font-size: 64px; color: #ffc107; margin-bottom: 20px;"></i>
+                        <h3>No Ads Today - It's Friday!</h3>
+                        <p>Enjoy your day off. Ads will be available again tomorrow.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Check if country is selected
+            if (!userData.country) {
+                adsContainer.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-globe" style="font-size: 64px; color: #1a2980; margin-bottom: 20px;"></i>
+                        <h3>Select Your Country</h3>
+                        <p>Please select your country above to see ads.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Show 100+ ads per day
+            const maxAdsToShow = DAILY_AD_LIMIT;
+            const adsToShow = Math.min(adUrls.length, maxAdsToShow);
+            
+            let adCount = 0;
+            
+            for (let i = 0; i < adsToShow; i++) {
+                const adUrl = adUrls[i];
+                const adId = i + 1;
+                const isClicked = userData.clickedAds.includes(adId);
+                const isHidden = userData.hiddenAds.includes(adId);
+                
+                // Skip already hidden ads
+                if (isHidden) continue;
+                
+                adCount++;
+                
+                const adCard = document.createElement('div');
+                adCard.className = 'ad-card';
+                adCard.id = `ad-card-${adId}`;
+                adCard.innerHTML = `
+                    <div class="ad-header">
+                        <div class="ad-id">Ad #${adId}</div>
+                        <div class="ad-amount">+ $${EARN_PER_CLICK.toFixed(2)}</div>
+                    </div>
+                    <p class="ad-description">Click to earn $${EARN_PER_CLICK.toFixed(2)}</p>
+                    <button class="ad-btn" id="ad-btn-${adId}" ${isClicked || userData.todayClicks >= DAILY_AD_LIMIT ? 'disabled' : ''}>
+                        ${isClicked ? '<i class="fas fa-check-circle"></i> Clicked' : `<i class="fas fa-mouse-pointer"></i> Earn $${EARN_PER_CLICK.toFixed(2)}`}
+                    </button>
+                    <div class="ad-footer">
+                        <div class="click-count">${isClicked ? 'Clicked' : 'Available'}</div>
+                        <div class="click-count">${adId}/${DAILY_AD_LIMIT}</div>
+                    </div>
+                `;
+                
+                adsContainer.appendChild(adCard);
+                
+                // Add click event to ad button
+                if (!isClicked) {
+                    document.getElementById(`ad-btn-${adId}`).addEventListener('click', () => handleAdClick(adId, adUrl));
+                }
+            }
+            
+            // If no ads to show, display message
+            if (adCount === 0) {
+                adsContainer.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-check-circle" style="font-size: 64px; color: #28a745; margin-bottom: 20px;"></i>
+                        <h3>All Ads Completed!</h3>
+                        <p>You have completed all available ads for today. Come back tomorrow for more ads to earn money!</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Handle ad click
+        function handleAdClick(adId, adUrl) {
+            // Check online status
+            if (!checkOnlineStatus()) {
+                showNotification('You are offline! Please connect to the internet to click ads.', 'error');
+                return;
+            }
+            
+            // Check if user is logged in
+            if (!userData.isLoggedIn) {
+                showNotification('Please login to click ads and earn money!', 'error');
+                openModal('login-modal');
+                return;
+            }
+            
+            // Check if account is banned
+            if (userData.isAccountBanned) {
+                showNotification('Your account is banned. Please create a new account to continue.', 'error');
+                return;
+            }
+            
+            // Check if country is selected
+            if (!userData.country) {
+                showNotification('Please select your country first!', 'error');
+                return;
+            }
+            
+            // Check if user has already clicked this ad today
+            if (userData.clickedAds.includes(adId)) {
+                showNotification('You have already clicked this ad today!', 'error');
+                return;
+            }
+            
+            // Check if user has reached daily limit
+            if (userData.todayClicks >= DAILY_AD_LIMIT) {
+                showNotification(`You have reached the daily limit of ${DAILY_AD_LIMIT} ads!`, 'error');
+                return;
+            }
+            
+            // Disable the button immediately
+            const adButton = document.getElementById(`ad-btn-${adId}`);
+            adButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            adButton.disabled = true;
+            
+            // Open the ad in a new tab
+            const newWindow = window.open(adUrl, '_blank');
+            
+            // Update user data
+            userData.balance += EARN_PER_CLICK;
+            userData.totalEarnings += EARN_PER_CLICK;
+            userData.todayEarnings += EARN_PER_CLICK;
+            userData.todayClicks += 1;
+            userData.totalClicks += 1;
+            userData.clickedAds.push(adId);
+            
+            // Check if balance reached withdraw limit
+            if (userData.balance >= WITHDRAW_LIMIT * 0.8) {
+                // Show warning when approaching limit (80% or more)
+                document.getElementById('account-warning').style.display = 'flex';
+            }
+            
+            // Save to localStorage
+            saveUserData();
+            
+            // Update UI
+            updateUI();
+            
+            // Show success message
+            showNotification(`You earned $${EARN_PER_CLICK.toFixed(2)}! New balance: $${userData.balance.toFixed(2)}`, 'success');
+            
+            // Auto-hide the ad after 5-7 seconds
+            setTimeout(() => {
+                const adCard = document.getElementById(`ad-card-${adId}`);
+                if (adCard) {
+                    // Add hiding animation class
+                    adCard.classList.add('hiding');
+                    
+                    // After animation completes, hide the ad
+                    setTimeout(() => {
+                        adCard.classList.add('hidden');
+                        userData.hiddenAds.push(adId);
+                        saveUserData();
+                        
+                        // Re-render ads to update layout
+                        renderAds();
+                    }, 500); // Match this with CSS animation duration
+                }
+            }, 2000 + Math.random() * 1000); // Random between 5-7 seconds
+        }
+        
+        // Handle country selection
+        function selectCountry(countryCode) {
+            // Update all country flags
+            countryFlags.forEach(flag => {
+                if (flag.dataset.country === countryCode) {
+                    flag.classList.add('selected');
+                } else {
+                    flag.classList.remove('selected');
+                }
+            });
+            
+            // Update user data
+            userData.country = countryCode;
+            
+            // Update UI
+            document.getElementById('selected-country').textContent = countries[countryCode].name;
+            
+            // Save to localStorage
+            saveUserData();
+            
+            // Show notification
+            showNotification(`Country set to ${countries[countryCode].name}`, 'success');
+            
+            // Re-render ads if logged in
+            if (userData.isLoggedIn && !userData.isAccountBanned) {
+                renderAds();
+            }
+        }
+        
+        // Handle share modal opening
+        function openShareModal() {
+            // Check online status
+            if (!checkOnlineStatus()) {
+                showNotification('You are offline! Please connect to the internet to share.', 'error');
+                return;
+            }
+            
+            // Check if user is logged in
+            if (!userData.isLoggedIn) {
+                showNotification('Please login to share and earn rewards!', 'error');
+                openModal('login-modal');
+                return;
+            }
+            
+            // Check if account is banned
+            if (userData.isAccountBanned) {
+                showNotification('Your account is banned. Please create a new account to continue.', 'error');
+                return;
+            }
+            
+            // Create personalized referral link
+            const referralLink = `https://www.appcreator24.com/app3880266-4unoqx?ref=${userData.username}`;
+            shareLinkInput.value = referralLink;
+            shareModalLinkInput.value = referralLink;
+            
+            // Open share modal
+            openModal('share-modal');
+        }
+        
+        // Handle social media sharing
+        function shareOnSocialMedia(platform) {
+            // Check online status
+            if (!checkOnlineStatus()) {
+                showNotification('You are offline! Please connect to the internet to share.', 'error');
+                return;
+            }
+            
+            const shareUrl = shareModalLinkInput.value;
+            const shareText = "Earn money by clicking ads on AdClickEarn! Join now and start earning today!";
+            let shareWindowUrl = '';
+            
+            switch(platform) {
+                case 'facebook':
+                    shareWindowUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}"e=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'whatsapp':
+                    shareWindowUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+                    break;
+                case 'telegram':
+                    shareWindowUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'twitter':
+                    shareWindowUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+                    break;
+                case 'email':
+                    shareWindowUrl = `mailto:?subject=${encodeURIComponent("Join AdClickEarn and Earn Money")}&body=${encodeURIComponent(shareText + '\n\n' + shareUrl)}`;
+                    break;
+                default:
+                    return;
+            }
+            
+            // Open share window
+            window.open(shareWindowUrl, '_blank', 'width=600,height=400');
+            
+            // Award referral reward if not already awarded today
+            awardReferralReward();
+        }
+        
+        // Award referral reward (now daily)
+        function awardReferralReward() {
+            // Check if user has already earned referral reward today
+            if (userData.sharedToday && userData.lastShareDate === currentDateString) {
+                showNotification('You have already shared today. You can share again tomorrow!', 'info');
+                return;
+            }
+            
+            // Update user data
+            userData.balance += REFERRAL_REWARD;
+            userData.referralEarnings += REFERRAL_REWARD;
+            userData.totalEarnings += REFERRAL_REWARD;
+            userData.sharedToday = true;
+            userData.lastShareDate = currentDateString;
+            
+            // Save to localStorage
+            saveUserData();
+            
+            // Update UI
+            updateUI();
+            
+            // Show success message
+            showNotification('You earned $1 for sharing today!', 'success');
+            
+            // Close share modal after a delay
+            setTimeout(() => {
+                closeModal('share-modal');
+            }, 2000);
+        }
+        
+        // Copy link to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Link copied to clipboard!', 'success');
+            }).catch(err => {
+                // Fallback method
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Link copied to clipboard!', 'success');
+            });
+        }
+        
+        // Handle withdraw request
+        function handleWithdrawRequest() {
+            // Check online status
+            if (!checkOnlineStatus()) {
+                showNotification('You are offline! Please connect to the internet to withdraw.', 'error');
+                return;
+            }
+            
+            // Check if user is logged in
+            if (!userData.isLoggedIn) {
+                showNotification('Please login to withdraw your earnings!', 'error');
+                openModal('login-modal');
+                return;
+            }
+            
+            // Check if account is banned
+            if (userData.isAccountBanned) {
+                showNotification('Your account is banned. Please create a new account.', 'error');
+                return;
+            }
+            
+            // Check if balance is sufficient
+            if (userData.balance < WITHDRAW_LIMIT) {
+                showNotification(`You need at least $${WITHDRAW_LIMIT} to withdraw! Current balance: $${userData.balance.toFixed(2)}`, 'error');
+                return;
+            }
+            
+            // Open withdraw modal
+            openWithdrawModal();
+        }
+        
+        // Open withdraw modal
+        function openWithdrawModal() {
+            document.getElementById('modal-balance').textContent = userData.balance.toFixed(2);
+            document.getElementById('withdraw-form').style.display = 'block';
+            document.getElementById('withdraw-success').style.display = 'none';
+            document.getElementById('withdraw-fail').style.display = 'none';
+            openModal('withdraw-modal');
+        }
+        
+        // Confirm withdraw
+        function confirmWithdraw() {
+            const paymentMethod = document.getElementById('payment-method').value;
+            const paymentDetails = document.getElementById('payment-details').value;
+            
+            if (!paymentDetails) {
+                showNotification('Please enter your payment details!', 'error');
+                return;
+            }
+            
+            // Simulate processing
+            document.getElementById('withdraw-form').style.display = 'none';
+            
+            // 50% chance of ban (simulating fake click detection)
+            const isFakeClick = Math.random() < 0.5;
+            
+            if (isFakeClick) {
+                // Ban account
+                banAccount();
+                document.getElementById('withdraw-fail').style.display = 'block';
+                document.getElementById('banned-withdraw-earnings').textContent = userData.balance.toFixed(2);
+            } else {
+                // Successful withdrawal
+                document.getElementById('withdraw-success').style.display = 'block';
+                
+                // Reset balance
+                userData.balance = 0;
+                saveUserData();
+                updateUI();
+            }
+        }
+        
+        // Ban account
+        function banAccount() {
+            userData.isAccountBanned = true;
+            saveUserData();
+            showBannedAccount();
+        }
+        
+        // Show banned account interface
+        function showBannedAccount() {
+            // Hide main content
+            document.querySelector('.content').style.display = 'none';
+            
+            // Show banned account message
+            accountBannedMessage.style.display = 'block';
+            document.getElementById('banned-earnings').textContent = userData.balance.toFixed(2);
+            
+            // Update sidebar to show banned status
+            document.getElementById('username-display').textContent = userData.username + ' (BANNED)';
+            document.getElementById('username-display').style.color = '#dc3545';
+            
+            // Show logout button
+            logoutBtn.style.display = 'block';
+            withdrawBtn.style.display = 'none';
+            loginBtn.style.display = 'none';
+            registerBtn.style.display = 'none';
+        }
+        
+        // Create a new account (after previous one is banned)
+        function createNewAccount() {
+            // Increment account number
+            userData.accountNumber = (userData.accountNumber || 1) + 1;
+            
+            // Reset user data for new account
+            userData.isLoggedIn = false;
+            userData.username = '';
+            userData.email = '';
+            userData.balance = 0;
+            userData.referralEarnings = 0;
+            userData.todayClicks = 0;
+            userData.todayEarnings = 0;
+            userData.clickedAds = [];
+            userData.hiddenAds = [];
+            userData.sharedToday = false;
+            userData.isAccountBanned = false;
+            
+            // Save to localStorage
+            saveUserData();
+            
+            // Show register modal
+            openModal('register-modal');
+            
+            // Show notification
+            showNotification('Please register a new account to continue earning!', 'info');
+        }
+        
+        // Update UI with current user data
+        function updateUI() {
+            // Update balance
+            document.getElementById('current-balance').textContent = userData.balance.toFixed(2);
+            document.getElementById('withdraw-balance').textContent = userData.balance.toFixed(2);
+            
+            // Update user info
+            document.getElementById('username-display').textContent = userData.isLoggedIn ? userData.username : 'Guest';
+            document.getElementById('username-display').style.color = userData.isAccountBanned ? '#dc3545' : '#1a2980';
+            document.getElementById('member-since').textContent = userData.joinDate || '-';
+            document.getElementById('total-earnings').textContent = userData.totalEarnings.toFixed(2);
+            document.getElementById('referral-earnings').textContent = userData.referralEarnings.toFixed(2);
+            document.getElementById('total-clicks').textContent = userData.totalClicks;
+            document.getElementById('today-clicks').textContent = `${userData.todayClicks}/${DAILY_AD_LIMIT}`;
+            document.getElementById('today-earnings').textContent = userData.todayEarnings.toFixed(2);
+            document.getElementById('shared-today').textContent = userData.sharedToday ? 'Yes' : 'No';
+            
+            // Update progress bar
+            const progressPercent = (userData.balance / WITHDRAW_LIMIT) * 100;
+            document.getElementById('balance-progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('balance-progress-text').textContent = `$${userData.balance.toFixed(2)} / $${WITHDRAW_LIMIT.toFixed(2)}`;
+            
+            // Update warning text
+            if (userData.balance >= WITHDRAW_LIMIT * 0.8 && userData.balance < WITHDRAW_LIMIT) {
+                document.getElementById('balance-warning').innerHTML = `<i class="fas fa-exclamation-triangle"></i> You can withdraw at $${WITHDRAW_LIMIT}`;
+                document.getElementById('balance-warning').style.color = '#ffc107';
+            } else if (userData.balance >= WITHDRAW_LIMIT) {
+                document.getElementById('balance-warning').innerHTML = `<i class="fas fa-check-circle"></i> Ready to withdraw!`;
+                document.getElementById('balance-warning').style.color = '#28a745';
+            } else {
+                document.getElementById('balance-warning').innerHTML = `Minimum Withdraw at $${WITHDRAW_LIMIT}`;
+                document.getElementById('balance-warning').style.color = '#dc3545';
+            }
+        }
+        
+        // Update UI for logged in user
+        function updateUIForLoggedInUser() {
+            loginBtn.style.display = 'none';
+            registerBtn.style.display = 'none';
+            logoutBtn.style.display = 'block';
+            withdrawBtn.style.display = 'block';
+            
+            // Show main content if account is not banned
+            if (!userData.isAccountBanned) {
+                document.querySelector('.content').style.display = 'block';
+                accountBannedMessage.style.display = 'none';
+            }
+            
+            updateUI();
+        }
+        
+        // Update UI for logged out user
+        function updateUIForLoggedOutUser() {
+            loginBtn.style.display = 'block';
+            registerBtn.style.display = 'block';
+            logoutBtn.style.display = 'none';
+            withdrawBtn.style.display = 'none';
+            
+            // Show main content
+            document.querySelector('.content').style.display = 'block';
+            accountBannedMessage.style.display = 'none';
+            
+            // Reset user data
+            userData.isLoggedIn = false;
+            userData.username = '';
+            userData.email = '';
+            userData.balance = 0;
+            userData.todayClicks = 0;
+            userData.todayEarnings = 0;
+            userData.clickedAds = [];
+            userData.hiddenAds = [];
+            userData.sharedToday = false;
+            userData.isAccountBanned = false;
+            
+            updateUI();
+            renderAds();
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            let icon = 'fas fa-info-circle';
+            if (type === 'success') icon = 'fas fa-check-circle';
+            if (type === 'error') icon = 'fas fa-exclamation-circle';
+            if (type === 'warning') icon = 'fas fa-exclamation-triangle';
+            
+            notification.innerHTML = `
+                <i class="${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Open modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Save user data to localStorage
+        function saveUserData() {
+            localStorage.setItem('adClickUserData', JSON.stringify(userData));
+            localStorage.setItem('lastActivityDate', today.toDateString());
+        }
+        
+        // Event Listeners
+        loginBtn.addEventListener('click', () => openModal('login-modal'));
+        registerBtn.addEventListener('click', () => openModal('register-modal'));
+        withdrawBtn.addEventListener('click', handleWithdrawRequest);
+        withdrawRequestBtn.addEventListener('click', handleWithdrawRequest);
+        shareRewardBtn.addEventListener('click', openShareModal);
+        
+        logoutBtn.addEventListener('click', () => {
+            userData.isLoggedIn = false;
+            saveUserData();
+            updateUIForLoggedOutUser();
+            showNotification('You have been logged out.', 'info');
+        });
+        
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+        
+        // Switch between login and register modals
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal('login-modal');
+            openModal('register-modal');
+        });
+        
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal('register-modal');
+            openModal('login-modal');
+        });
+        
+        // Create new account button
+        createNewAccountBtn.addEventListener('click', () => {
+            createNewAccount();
+        });
+        
+        createNewAfterBan.addEventListener('click', () => {
+            closeModal('withdraw-modal');
+            createNewAccount();
+        });
+        
+        closeWithdrawModal.addEventListener('click', () => {
+            closeModal('withdraw-modal');
+        });
+        
+        // Copy link buttons
+        copyLinkBtn.addEventListener('click', () => copyToClipboard(shareLinkInput.value));
+        copyModalLinkBtn.addEventListener('click', () => copyToClipboard(shareModalLinkInput.value));
+        shareCopyBtn.addEventListener('click', () => copyToClipboard(shareModalLinkInput.value));
+        
+        // Social media share buttons
+        shareFacebookBtn.addEventListener('click', () => shareOnSocialMedia('facebook'));
+        shareWhatsappBtn.addEventListener('click', () => shareOnSocialMedia('whatsapp'));
+        shareTelegramBtn.addEventListener('click', () => shareOnSocialMedia('telegram'));
+        shareTwitterBtn.addEventListener('click', () => shareOnSocialMedia('twitter'));
+        shareEmailBtn.addEventListener('click', () => shareOnSocialMedia('email'));
+        
+        // Confirm withdraw button
+        confirmWithdrawBtn.addEventListener('click', confirmWithdraw);
+        
+        // Country selection
+        countryFlags.forEach(flag => {
+            flag.addEventListener('click', () => {
+                selectCountry(flag.dataset.country);
+            });
+        });
+        
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (username && password) {
+                // Check if user exists in localStorage
+                const savedUserData = localStorage.getItem('adClickUserData');
+                
+                if (savedUserData) {
+                    const user = JSON.parse(savedUserData);
+                    
+                    // Check if account is banned
+                    if (user.isAccountBanned) {
+                        showNotification('This account is banned. Please create a new account.', 'error');
+                        return;
+                    }
+                    
+                    // Simple authentication
+                    if (user.username === username && user.password === password) {
+                        Object.assign(userData, user);
+                        userData.isLoggedIn = true;
+                        
+                        saveUserData();
+                        updateUIForLoggedInUser();
+                        closeModal('login-modal');
+                        showNotification(`Welcome back, ${username}!`, 'success');
+                        
+                        // Clear form
+                        loginForm.reset();
+                    } else {
+                        showNotification('Invalid username or password!', 'error');
+                    }
+                } else {
+                    showNotification('No account found with that username!', 'error');
+                }
+            } else {
+                showNotification('Please fill in all fields!', 'error');
+            }
+        });
+        
+        // Register form submission
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            // Validation
+            if (!username || !email || !password || !confirmPassword) {
+                showNotification('Please fill in all fields!', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match!', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters!', 'error');
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                isLoggedIn: true,
+                username: username,
+                email: email,
+                password: password,
+                joinDate: today.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }),
+                country: userData.country || '',
+                balance: 0,
+                referralEarnings: 0,
+                totalEarnings: userData.totalEarnings || 0,
+                totalClicks: userData.totalClicks || 0,
+                todayClicks: 0,
+                todayEarnings: 0,
+                isAccountBanned: false,
+                clickedAds: [],
+                hiddenAds: [],
+                sharedToday: false,
+                lastShareDate: '',
+                accountNumber: userData.accountNumber || 1
+            };
+            
+            // Save user data
+            Object.assign(userData, newUser);
+            saveUserData();
+            
+            // Update UI
+            updateUIForLoggedInUser();
+            closeModal('register-modal');
+            showNotification(`Account created successfully! Welcome, ${username}!`, 'success');
+            
+            // Clear form
+            registerForm.reset();
+        });
+        
+        // Initialize the app
+        initApp();
+    </script>
+</body>
+</html>
